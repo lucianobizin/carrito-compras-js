@@ -1,0 +1,53 @@
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    width: calc(100% * 7);
+    animation: carousel-slide 30s infinite;
+}
+
+.carousel-item {
+    flex-basis: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.carousel-item h3 {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+@keyframes carousel-slide {
+    0% {
+        transform: translateX(0);
+    }
+    16.666% {
+        transform: translateX(-100%);
+    }
+    33.333% {
+        transform: translateX(-200%);
+    }
+    50% {
+        transform: translateX(-300%);
+    }
+    66.666% {
+        transform: translateX(-400%);
+    }
+    83.333% {
+        transform: translateX(-500%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}

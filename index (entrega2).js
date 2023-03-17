@@ -1,14 +1,10 @@
 /* Alcance del proyecto
 
-Este proyecto se enmarca dentro de un sitio web de venta de servicios que favorecen el auto-conocimiento evolutivo-terapéutico.
-Es un caso de un potencial clientes que se ha acercado para verificar la posibilidad de la generación de un sitio web que posea una página dentro del sitio por medio de la cual pueda ofrecer sus servicios y productos desde Bilbao, España.
-Se ofrecerán varios servicios y productos por rubro y se los podrá añadir a un carrito para su posterior venta.
+Este proyecto busca simular un carrito de venta de servicios y productos destinados para procesos de auto-conocimiento evolutivo-terapéuticos.
+Es un caso de un potencial clientes que se ha acercado para verificar la posibilidad de la generación de un sitio web con venta de sus servicios y productos desde Bilbao, España.
+Se ofrecerán varios servicios por rubro y se los podrá añadir a un carrito para su posterior venta.
 
-Esta es una segunda aproximación a fin de presentar la temática (entiendo que se podría haber clases y subclases que favorecerían el ordenamiento)
-
-En esta ocasión se agregó el código HTML de la
-
-NOTA: la primera aproximación se conservó en index(entrega2).js
+Esta es una primera aproximación a fin de presentar la temática (entiendo que se podría haber clases y subclases que favorecerían el ordenamiento)
 
 */
 
@@ -118,17 +114,12 @@ const tallerVirtualIntroTarot = new Tarot(4.5, 'Taller introductorio al tarot (a
 const nocheTarotYVino = new Eventos(5.1, 'Noche de tarot y vino', 20, 'Una noche de encuentro, tarot y vino', '25/03/2023', 19, 'Bilbao', 50);
 
 const deckTarot1 = new Productos(6.1, 'Deck de tarot con animales', 20, 10, 'global');
-const setPiedras = new Productos(6.2, 'Set de piedras', 5, 8, 'Pais Vasco');
+const piedraAmatista = new Productos(6.2, 'Piedra amatista', 5, 8, 'Pais Vasco');
 const runasNordicas = new Productos(6.3, 'Runas Nórdicas talladas en madera regional', 15, 5, 'global');
 const velaAromatizante = new Productos(6.4, 'Vela aromatizante para meditar', 7, 10, 'España');
 const dadosTiradas = new Productos(6.5, 'Dados políedricos de doce caras', 7, 10, 'España');
+const esenciaFloral = new Productos(6.6, 'Esencia floral para meditar', 5, 10, 'España');
 const sahumerio = new Productos(6.7, 'Sahumerio 100% natural', 1.5, 20, 'Pais Vasco');
-
-// Carrousel de ./pages/productos_servicios.html
-const carousel = document.querySelector('.carousel');
-const carouselItems = document.querySelectorAll('.carousel-item');
-const carouselWidth = carouselItems.length * 100;
-carousel.style.width = `${carouselWidth}%`;
 
 // // Revisando servicios y productos aleatorios
 // console.log (sinestrias);
