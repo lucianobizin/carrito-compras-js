@@ -123,7 +123,7 @@ const runasDadosMujeresYMás = new Eventos(5.5, 'Runas, dados, mujeres y más', 
 const despertandoFuerzaFemenina = new Eventos(5.6, 'Despertando la fuerza femenina', 20, 'Fin de semana de retiro holísitico para hacer fluir el manantial de la mujer', '15/08/2023', 8, 'Bilbao', 100);
 
 // Se crean los productos ofrecidos
-const deckTarot1 = new Productos(6.1, 'Deck de tarot', 20, 10, 'global');
+const deckTarot = new Productos(6.1, 'Deck de tarot', 20, 10, 'global');
 const setPiedras = new Productos(6.2, 'Set de piedras', 5, 8, 'Pais Vasco');
 const runasNordicas = new Productos(6.3, 'Runas Nórdicas talladas en madera regional', 15, 5, 'global');
 const velaAromatizante = new Productos(6.4, 'Vela aromatizante para meditar', 7, 10, 'España');
@@ -140,170 +140,396 @@ carousel.style.width = `${carouselWidth}%`;
 // 4. SIMULACIÓN DE ADQUISICIÓN DE SERVICIOS Y PRODUCTOS
 
 // 4.1. SE CREAN LOS ARRAYS CON LOS PRODUCTOS
-const astrología = [cartaNatal, revolucionSolar, transitos, progresiones, sinestrias, analisisCompletoMBTI];
+const astrologia = [cartaNatal, revolucionSolar, transitos, progresiones, sinestrias, analisisCompletoMBTI];
 const cursos = [introduccionTarot, nivelMedioTarot, nivelAvanzadoTarot, introduccionAstro, nivelMedioAstro, nivelAvanzadoAstro];
 const tiradasDadosYRunas = [tiradaDados2Preg, tiradaDados3Preg, tiradaDados4Preg, tiradaRunasNordicas2Preg, tiradaRunasNordicas3Preg, tiradaRunasNordicas4Preg];
 const tarot = [tiradaCasasAstrologicas, tiradaTarot2Preg, tiradaTarot3Preg, tiradaTarot4Preg, tiradaTarot1hora, tallerVirtualIntroTarot];
 const eventos = [nocheTarotYVino, mitologiaFemenina, tardesSimbolosAstrologicos, chocolateVinoAstrologia, runasDadosMujeresYMás, despertandoFuerzaFemenina];
+const productos = [deckTarot, setPiedras, runasNordicas, velaAromatizante, dadosTiradas, sahumerio];
 
-// 4.2. FUNCIÓN DE COMPRA DE SERVICIOS Y PRODUCTOS
+// 4.2. SE CREA UN ARRAY GENERAL PARA CENTRALIZAR TODOS LOS PRODUCTOS Y SERVICIOS PARA CUALQUIER MANIPULACIÓN O BÚSQUEDA
+const serviciosYProductos = [astrologia, cursos, tiradasDadosYRunas, tarot, eventos, productos];
 
-const comprarServiciosProductos = (elemento) => {
-    Alert ("Usted ha decidido adquirir un servicio y/o producto")
-    Prompt ("¿Qué servicio o producto quieres adquirir?")
+// 4.3. SE CREAR UNA FUNCIÓN PARA BUSCAR PRODUCTOS (se linkeará con el botón "Buscar productos de ./productos_servicios.html")
+productoIngresado = prompt('¿Qué producto o servicio querés consultar? 1. Astrología, 2. Cursos, 3. Dados y Runas, 4. Tarot, 5. Eventos, 6. Productos')
+productoIngresadoUpper = productoIngresado.toUpperCase();
+
+productoCorrecto = false;    
+while (productoCorrecto === false) {
+
+    if (productoIngresadoUpper === 'ASTROLOGÍA') {
+        alert('Su respuesta ha sido 1: Astrología');
+        productoCorrecto = true;
+    } else if (productoIngresadoUpper === 'CURSOS') {
+        alert('Su respuesta ha sido 2: Mbti');
+        productoCorrecto = true;
+    } else if (productoIngresadoUpper === 'DADOS Y RUNAS') {
+        alert('Su respuesta ha sido 3: Dados y Runas');
+        productoCorrecto = true;
+    } else if (productoIngresadoUpper ===  'TAROT') {
+        alert('Su respuesta ha sido 4: Tarot');
+        productoCorrecto = true;
+    } else if (productoIngresadoUpper === 'EVENTOS') {
+        alert('Su respuesta ha sido 5: Eventos');
+        productoCorrecto = true;
+    } else if (productoIngresadoUpper === 'PRODUCTOS') {
+        alert('Su respuesta ha sido 6: Productos');
+        productoCorrecto = true;
+    } else {
+        productoIngresado = prompt('Indica el nombre correcto del tipo de producto o servicio que deseas buscar: 1. Astrología, 2. Cursos, 3. DadosYrunas, 4. Tarot, 5. Eventos, 6. Productos').toLocaleUpperCase();
+        productoIngresadoUpper = productoIngresado.toUpperCase();
+    }
+
 }
 
+const BuscarProducto = (productoIngresado) => {
 
-
-
-
-
-
-// Se crea una variable para terminar la compra cuando el usuario lo desee
-let terminarCompra = false;
-
-// Se crea un while a fin de continuar o detener la compra de parte del usuario
-while (terminarCompra === false) {
-
-    // Se solicita que el usuario indique si quiere adquirir un producto o servicio
-    let servicioOProductoDeseado = parseInt(
-        prompt('Indica si deseas un producto o servicios escribiendo 1 para productos y 2 para servicios: '));
-
-    // Se crea esta variable para permanecer (validar respuesta del usuario) o salir del ciclo
-    let escogioProductoOServicio = false;
-
-    while (escogioProductoOServicio === false) {
-        if (servicioOProductoDeseado === 1) {
-            alert('Su respuesta ha sido 1: producto');
-            escogioProductoOServicio = true;
-        } else if (servicioOProductoDeseado === 2) {
-            alert('Su respuesta ha sido 2: servicio');
-            escogioProductoOServicio = true;
-        } else {
-            servicioOProductoDeseado = parseInt(prompt('Indica si deseas un producto o servicios escribiendo 1 para productos y 2 para servicios: '))
-        }
-    }
-
-    let terminarCompraServicio = false;
-    let terminarCompraProducto = false;
-
-    // Si el usuario eligió 1
-    if (servicioOProductoDeseado === 1) {
-
-        let servicioComprar = parseInt(
-            prompt('Indica el número del servicio que deseas adquirir ---> 1. Astrologia, 2. Mbti, 3. Dados, 4. Runas, 5. Tarot, 6. Eventos'));
-
-        while (terminarCompraServicio === false) {
-
-            if (servicioComprar === 1) {
-                alert('Su respuesta ha sido 1: Astrologia');
-                terminarCompraServicio = true;
-            } else if (servicioComprar === 2) {
-                alert('Su respuesta ha sido 2: Mbti');
-                terminarCompraServicio = true
-            } else if (servicioComprar === 3) {
-                alert('Su respuesta ha sido 3: Dados');
-                terminarCompraServicio = true
-            } else if (servicioComprar === 4) {
-                alert('Su respuesta ha sido 4: Runas');
-                terminarCompraServicio = true
-            } else if (servicioComprar === 5) {
-                alert('Su respuesta ha sido 5: Tarot');
-                terminarCompraServicio = true
-            } else if (servicioComprar === 6) {
-                alert('Su respuesta ha sido 6: Evento');
-                terminarCompraServicio = true
-            } else {
-                servicioComprar = parseInt(
-                    prompt('Indica el número del servicio que deseas adquirir ---> 1. Astrologia, 2. Mbti, 3. Dados, 4. Runas, 5. Tarot, 6. Eventos: '))
+    switch (productoIngresadoUpper) {
+        case 'ASTROLOGÍA': 
+            productoAstrologia = prompt('Indica el servicio de Astrología que deseas buscar: 1. Carta natal, 2. Revolución solar, 3. Tránsitos, 4. Progresiones, 5. Sinestrías, 6. Análisis Completo MBTI]');
+            productoAstrologiaUpper = productoAstrologia.toUpperCase();
+            validador = false
+            while (validador === false) {
+                if (productoAstrologiaUpper === 'CARTA NATAL') {
+                    alert('Su respuesta ha sido 1: Carta natal');
+                    validador = true;
+                } else if (productoAstrologiaUpper === 'REVOLUCIÓN SOLAR') {
+                    alert('Su respuesta ha sido 2: Revolución solar');
+                    validador = true;
+                } else if (productoAstrologiaUpper === 'TRÁNSITOS') {
+                    alert('Su respuesta ha sido 3: Tránsitos');
+                    validador = true;
+                } else if (productoAstrologiaUpper ===  'PROGRESIONES') {
+                    alert('Su respuesta ha sido 4: Progresiones');
+                    validador = true;
+                } else if (productoAstrologiaUpper === 'SINESTRÍAS') {
+                    alert('Su respuesta ha sido 5: Sinestrías');
+                    validador = true;
+                } else if (productoAstrologiaUpper === 'ANÁLISIS COMPLETO MBTI') {
+                    alert('Su respuesta ha sido 6: Análisis completo MBTI');
+                    validador = true;
+                } else {
+                    productoAstrologia = prompt('Indica el servicio de Astrología que deseas buscar: 1. Carta natal, 2. Revolución solar, 3. Tránsitos, 4. Progresiones, 5. Sinestrías, 6. Análisis Completo MBTI').toLocaleUpperCase();
+                    productoAstrologiaUpper = productoAstrologia.toUpperCase();
+                }
             }
-        }
+            
+            return alert(`Usted ha elegido ${productoAstrologia} de los servicio de astrología`);
 
-        // si el usuario eligió 2
-    } else if (servicioOProductoDeseado === 2) {
-
-        let servicioComprar = parseInt(
-            prompt('Indica el número del servicio que deseas adquirir ---> 1. Tarot, 2. Piedras, 3. Runas, 4. Dados, 5. Esencias, 6. Sahumerios: '));
-
-        while (terminarCompraProducto === false) {
-
-            if (servicioComprar === 1) {
-                alert('Su respuesta ha sido 1: Tarot');
-                terminarCompraProducto = true;
-            } else if (servicioComprar === 2) {
-                alert('Su respuesta ha sido 2: Piedras');
-                terminarCompraProducto = true
-            } else if (servicioComprar === 3) {
-                alert('Su respuesta ha sido 3: Runas');
-                terminarCompraProducto = true
-            } else if (servicioComprar === 4) {
-                alert('Su respuesta ha sido 4: Dados');
-                terminarCompraProducto = true
-            } else if (servicioComprar === 5) {
-                alert('Su respuesta ha sido 5: Esencias');
-                terminarCompraProducto = true
-            } else if (servicioComprar === 6) {
-                alert('Su respuesta ha sido 6: Sahumerios');
-                terminarCompraProducto = true
-            } else {
-                servicioComprar = parseInt(
-                    prompt('Indica el número del servicio que deseas adquirir ---> 1. Astrologia, 2. Mbti, 3. Dados, 4. Runas, 5. Tarot, 6. Eventos: '))
+        case 'CURSOS': 
+            productoCursos = prompt('Indica el el curso que deseas buscar: 1. Introducción al tarot, 2. Nivel medio de tarot, 3. Nivel avanzado de tarot, 4. Introducción a la astrología, 5. Nivel medio de astrología, 6. Nivel avanzado de Astrología');
+            productoCursosUpper = productoCursos.toUpperCase();
+            validador = false
+            while (validador === false) {
+                if (productoCursosUpper === 'INTRODUCCIÓN AL TAROT') {
+                    alert('Su respuesta ha sido 1: Introducción al tarot');
+                    validador = true;
+                } else if (productoCursosUpper === 'NIVEL MEDIO DE TAROT') {
+                    alert('Su respuesta ha sido 2: Nivel medio de tarot');
+                    validador = true;
+                } else if (productoCursosUpper === 'NIVEL AVANZADO DE TAROT') {
+                    alert('Su respuesta ha sido 3: Nivel avanzado de tarot');
+                    validador = true;
+                } else if (productoCursosUpper ===  'INTRODUCCIÓN A LA ASTROLOGÍA') {
+                    alert('Su respuesta ha sido 4: Introducción a la astrología');
+                    validador = true;
+                } else if (productoCursosUpper === 'NIVEL MEDIO DE ASTROLOGÍA') {
+                    alert('Su respuesta ha sido 5: Nivel medio de astrología');
+                    validador = true;
+                } else if (productoCursosUpper === 'NIVEL AVANZADO DE ASTROLOGÍA') {
+                    alert('Su respuesta ha sido 6: Nivel avanzado de astrología');
+                    validador = true;
+                } else {
+                    productoCursos = prompt('1. Introducción al tarot, 2. Nivel medio de tarot, 3. Nivel avanzado de tarot, 4. Introducción a la astrología, 5. Nivel medio de astrología, 6. Nivel avanzado de Astrología').toLocaleUpperCase();
+                    productoCursosUpper = productoCursos.toUpperCase();
+                }
             }
-        }
-    }
+            
+            return alert(`Usted ha elegido ${productoCursos} de los servicios de cursos`);
 
-    let agregarCarrito = false;
-    let seguirComprando = parseInt(prompt('Desea seguir comprando, indique 1 para SI y 2 para NO'));
+        case 'DADOS Y RUNAS': 
+            productoDadosRunas = prompt('Indica el servicio de dados o runas que deseas buscar: 1. Tirada de dados 2 preguntas, 2. Tirada de dados 3 preguntas, 3. Tirada de dados 4 preguntas, 4. Tirada de runas nórdicas 2 preguntas, 5. Tirada de runas nórdicas 3 preguntas, 6. Tirada de runas nórdicas 4 preguntas');
+            productoDadosRunasUpper = productoDadosRunas.toUpperCase();
+            validador = false
+            while (validador === false) {
+                if (productoDadosRunasUpper === 'TIRADA DE DATOS 2 PREGUNTAS') {
+                    alert('Su respuesta ha sido 1: Tirada de dados 2 preguntas');
+                    validador = true;
+                } else if (productoDadosRunasUpper === 'TIRADA DE DATOS 3 PREGUNTAS') {
+                    alert('Su respuesta ha sido 2: Tirada de dados 3 preguntas');
+                    validador = true;
+                } else if (productoDadosRunasUpper === 'TIRADA DE DATOS 4 PREGUNTAS') {
+                    alert('Su respuesta ha sido 3: Tirada de dados 4 preguntas');
+                    validador = true;
+                } else if (productoDadosRunasUpper ===  'TIRADA DE RUNAS NÓRDICAS 2 PREGUNTAS') {
+                    alert('Su respuesta ha sido 4: Tirada de runas nórdicas 2 preguntas');
+                    validador = true;
+                } else if (productoDadosRunasUpper === 'TIRADA DE RUNAS NÓRDICAS 3 PREGUNTAS') {
+                    alert('Su respuesta ha sido 5: Tirada de runas nórdicas 3 preguntas');
+                    validador = true;
+                } else if (productoDadosRunasUpper === 'TIRADA DE RUNAS NÓRDICAS 4 PREGUNTAS') {
+                    alert('Su respuesta ha sido 6: Tirada de runas nórdicas 4 preguntas');
+                    validador = true;
+                } else {
+                    productoDadosRunas = prompt('1. Introducción al tarot, 2. Nivel medio de tarot, 3. Nivel avanzado de tarot, 4. Introducción a la astrología, 5. Nivel medio de astrología, 6. Nivel avanzado de Astrología').toLocaleUpperCase();
+                    productoDadosRunasUpper = productoDadosRunas.toUpperCase();
+                }
+            }
+            
+            return alert(`Usted ha elegido ${productoDadosRunas} de los servicios de dados y runas`);
 
-    while (agregarCarrito === false) {
+        case 'TAROT': 
+            productoTarot = prompt('Indica el servicio de tarot que deseas buscar: 1. Tirada de casas astrológicas, 2. Tirada de tarot 2 preguntas, 3. Tirada de tarot 3 preguntas, 4. Tirada de tarot 4 preguntas, 5. Tirada de tarot 1 hora, 6. Taller virtual de introducción al tarot');
+            productoTarotUpper = productoTarot.toUpperCase();
+            validador = false
+            while (validador === false) {
+                if (productoTarotUpper === 'TIRADA DE CASAS ASTROLÓGICAS') {
+                    alert('Su respuesta ha sido 1: tirada de casas astrológicas');
+                    validador = true;
+                } else if (productoTarotUpper === 'TIRADA DE TAROT 2 PREGUNTAS') {
+                    alert('Su respuesta ha sido 2: Tirada de tarot 2 preguntas');
+                    validador = true;
+                } else if (productoTarotUpper === 'TIRADA DE TAROT 3 PREGUNTAS') {
+                    alert('Su respuesta ha sido 3: Tirada de tarot 3 preguntas');
+                    validador = true;
+                } else if (productoTarotUpper ===  'TIRADA DE TAROT 4 PREGUNTAS') {
+                    alert('Su respuesta ha sido 4: Tirada de tarot 4 preguntas');
+                    validador = true;
+                } else if (productoTarotUpper === 'TIRADA DE TAROT 1 HORA') {
+                    alert('Su respuesta ha sido 5: Tirada de tarot 1 hora');
+                    validador = true;
+                } else if (productoTarotUpper === 'TALLER VIRTUAL DE INTRODUCCIÓN AL TAROT') {
+                    alert('Su respuesta ha sido 6: Taller virtual de introducción al tarot');
+                    validador = true;
+                } else {
+                    productoTarot = prompt('1. Tirada de casas astrológicas, 2. Tirada de tarot 2 preguntas, 3. Tirada de tarot 3 preguntas, 4. Tirada de tarot 4 preguntas, 5. Tirada de tarot 1 hora, 6. Taller virtual de introducción al tarot').toLocaleUpperCase();
+                    productoTarotUpper = productoTarot.toUpperCase();
+                }
+            }
+            
+            return alert(`Usted ha elegido ${productoTarot} de los servicios de tarot`);
 
-        if (seguirComprando === 1) {
-            agregarCarrito = true;
-        } else if (seguirComprando === 2) {
-            alert('Gracias por su compra');
-            agregarCarrito = true;
-            terminarCompra = true;
-        } else {
-            seguirComprando = parseInt(prompt('Desea seguir comprando, indique 1 para SI y 2 para NO'));
-        }
+        case 'EVENTOS': 
+            productoEventos = prompt('Indica el servicio de eventos que deseas buscar: 1. Noche de tarot y vino, 2. Mitología femenina, 3. Tardes de simbolos astrologicos, 4. Chocolate, vino y astrologia, 5. Runas, dados, mujeres y más, 6. Despertando la fuerza femenina');
+            productoEventosUpper = productoEventos.toUpperCase();
+            validador = false
+            while (validador === false) {
+                if (productoEventosUpper === 'NOCHE DE TAROT Y VINO') {
+                    alert('Su respuesta ha sido 1: Noche de tarot y vino');
+                    validador = true;
+                } else if (productoEventosUpper === 'MITOLOGÍA FEMENINA') {
+                    alert('Su respuesta ha sido 2: Mitología femenina');
+                    validador = true;
+                } else if (productoEventosUpper === 'TARDES DE SÍMBOLOS ASTROLÓGICOS') {
+                    alert('Su respuesta ha sido 3: Tardes de simbolos astrologicos');
+                    validador = true;
+                } else if (productoEventosUpper ===  'CHOCOLATE, VINO Y ASTROLOGÍA') {
+                    alert('Su respuesta ha sido 4: Chocolate, vino y astrologia');
+                    validador = true;
+                } else if (productoEventosUpper === 'RUNAS, DADOS, MUJERES Y MÁS') {
+                    alert('Su respuesta ha sido 5: Runas, dados, mujeres y más');
+                    validador = true;
+                } else if (productoEventosUpper === 'DESPERTANDO LA FUERZA FEMENINA') {
+                    alert('Su respuesta ha sido 6: Despertando la fuerza femenina');
+                    validador = true;
+                } else {
+                    productoEventos = prompt('1. Noche de tarot y vino, 2. Mitología femenina, 3. Tardes de simbolos astrologicos, 4. Chocolate, vino y astrologia, 5. Runas, dados, mujeres y más, 6. Despertando la fuerza femenina').toLocaleUpperCase();
+                    productoEventosUpper = productoEventos.toUpperCase();
+                }
+            }
+            
+            return alert(`Usted ha elegido ${productoEventos} de los servicios de eventos`);
+
+        case 'PRODUCTOS': 
+            productoProductos = prompt('Indica el servicio de eventos que deseas buscar: 1. Deck de tarot, 2. Set de piedras, 3. Runas nórdicas, 4. Vela aromatizante, 5. Dados para tiradas, 6. Sahumerio');
+            productoProductosUpper = productoProductos.toUpperCase();
+            validador = false
+            while (validador === false) {
+                if (productoProductosUpper === 'DECK DE TAROT') {
+                    alert('Su respuesta ha sido 1: Deck de tarot');
+                    validador = true;
+                } else if (productoProductosUpper === 'SET DE PIEDRAS') {
+                    alert('Su respuesta ha sido 2: Set de piedras');
+                    validador = true;
+                } else if (productoProductosUpper === 'RUNAS NÓRDICAS') {
+                    alert('Su respuesta ha sido 3: Runas nórdicas');
+                    validador = true;
+                } else if (productoProductosUpper ===  'VELA AROMATIZANTE') {
+                    alert('Su respuesta ha sido 4: Vela aromatizante');
+                    validador = true;
+                } else if (productoProductosUpper === 'DADOS PARA TIRADAS') {
+                    alert('Su respuesta ha sido 5: Dados para tiradas');
+                    validador = true;
+                } else if (productoProductosUpper === 'SAHUMERIO') {
+                    alert('Su respuesta ha sido 6: Sahumerio');
+                    validador = true;
+                } else {
+                    productoProducto = prompt('1. Deck de tarot, 2. Set de piedras, 3. Runas nórdicas, 4. Vela aromatizante, 5. Dados para tiradas, 6. Sahumerio').toLocaleUpperCase();
+                    productoProductosUpper = productoProducto.toUpperCase();
+                }
+            }
+            
+            return alert(`Usted ha elegido ${productoProducto} de los productos ofrecidos`);
+
+        default:
+            return Alert ('Error crítico, debe volver a comenzar')
     }
 }
 
-// Generando una función de simulación de presupuesto
+BuscarProducto (productoIngresado);
 
-alert ('Ahora simularemos un presupuesto')
-
-function SimularPresupuesto () {
-
-    let salirLoop = false;
+// // 4.4. SE CREAR UNA FUNCIÓN PARA COMPRAR PRODUCTOS (se linkeará con los botones de "Comprar" de ./productos_servicios.html")
+// const comprarServiciosProductos = (elemento) => {
+//     Alert ("Usted ha decidido adquirir un servicio y/o producto")
+//     Prompt ("¿Qué servicio o producto quieres adquirir?")
     
-    let precioProductoOServicio;
-    let cantidadProductoOServicio;
-    let total =0; 
-    let subtotal=0;
-    while (salirLoop === false){
+// }
 
-        precioProductoOServicio = parseInt(prompt('Ingresa el precio de un producto o servicio a adquirir'));
-        cantidadProductoOServicio = parseInt(prompt('Ingresa la cantidad del producto o servicio a adquirir'));
-        subtotal = precioProductoOServicio*cantidadProductoOServicio;
-        total = subtotal+total;
-        // console.log (total);
+// // Se crea una variable para terminar la compra cuando el usuario lo desee
+// let terminarCompra = false;
 
-        let respuesta = parseInt(prompt('Desea seguir presupuestando, indique 1 para SI y 2 para NO'));
+// // Se crea un while a fin de continuar o detener la compra de parte del usuario
+// while (terminarCompra === false) {
 
-        if (respuesta === 1) {
-            continue
-        } else if (respuesta === 2){
-            return total;
-        } else {
-            respuesta = parseInt(prompt('Desea seguir presupuestando, indique 1 para SI y 2 para NO'));
-        }
-    }
-}
+//     // Se solicita que el usuario indique si quiere adquirir un producto o servicio
+//     let servicioOProductoDeseado = parseInt(
+//         prompt('Indica si deseas un producto o servicios escribiendo 1 para productos y 2 para servicios: '));
 
-const simulandoPresupuesto = SimularPresupuesto();
-// console.log(simulandoPresupuesto);
-alert(simulandoPresupuesto)
+//     // Se crea esta variable para permanecer (validar respuesta del usuario) o salir del ciclo
+//     let escogioProductoOServicio = false;
+
+//     while (escogioProductoOServicio === false) {
+//         if (servicioOProductoDeseado === 1) {
+//             alert('Su respuesta ha sido 1: producto');
+//             escogioProductoOServicio = true;
+//         } else if (servicioOProductoDeseado === 2) {
+//             alert('Su respuesta ha sido 2: servicio');
+//             escogioProductoOServicio = true;
+//         } else {
+//             servicioOProductoDeseado = parseInt(prompt('Indica si deseas un producto o servicios escribiendo 1 para productos y 2 para servicios: '))
+//         }
+//     }
+
+//     let terminarCompraServicio = false;
+//     let terminarCompraProducto = false;
+
+//     // Si el usuario eligió 1
+//     if (servicioOProductoDeseado === 1) {
+
+//         let servicioComprar = parseInt(
+//             prompt('Indica el número del servicio que deseas adquirir ---> 1. Astrologia, 2. Mbti, 3. Dados, 4. Runas, 5. Tarot, 6. Eventos'));
+
+//         while (terminarCompraServicio === false) {
+
+//             if (servicioComprar === 1) {
+//                 alert('Su respuesta ha sido 1: Astrologia');
+//                 terminarCompraServicio = true;
+//             } else if (servicioComprar === 2) {
+//                 alert('Su respuesta ha sido 2: Mbti');
+//                 terminarCompraServicio = true
+//             } else if (servicioComprar === 3) {
+//                 alert('Su respuesta ha sido 3: Dados');
+//                 terminarCompraServicio = true
+//             } else if (servicioComprar === 4) {
+//                 alert('Su respuesta ha sido 4: Runas');
+//                 terminarCompraServicio = true
+//             } else if (servicioComprar === 5) {
+//                 alert('Su respuesta ha sido 5: Tarot');
+//                 terminarCompraServicio = true
+//             } else if (servicioComprar === 6) {
+//                 alert('Su respuesta ha sido 6: Evento');
+//                 terminarCompraServicio = true
+//             } else {
+//                 servicioComprar = parseInt(
+//                     prompt('Indica el número del servicio que deseas adquirir ---> 1. Astrologia, 2. Mbti, 3. Dados, 4. Runas, 5. Tarot, 6. Eventos: '))
+//             }
+//         }
+
+//         // si el usuario eligió 2
+//     } else if (servicioOProductoDeseado === 2) {
+
+//         let servicioComprar = parseInt(
+//             prompt('Indica el número del servicio que deseas adquirir ---> 1. Tarot, 2. Piedras, 3. Runas, 4. Dados, 5. Esencias, 6. Sahumerios: '));
+
+//         while (terminarCompraProducto === false) {
+
+//             if (servicioComprar === 1) {
+//                 alert('Su respuesta ha sido 1: Tarot');
+//                 terminarCompraProducto = true;
+//             } else if (servicioComprar === 2) {
+//                 alert('Su respuesta ha sido 2: Piedras');
+//                 terminarCompraProducto = true
+//             } else if (servicioComprar === 3) {
+//                 alert('Su respuesta ha sido 3: Runas');
+//                 terminarCompraProducto = true
+//             } else if (servicioComprar === 4) {
+//                 alert('Su respuesta ha sido 4: Dados');
+//                 terminarCompraProducto = true
+//             } else if (servicioComprar === 5) {
+//                 alert('Su respuesta ha sido 5: Esencias');
+//                 terminarCompraProducto = true
+//             } else if (servicioComprar === 6) {
+//                 alert('Su respuesta ha sido 6: Sahumerios');
+//                 terminarCompraProducto = true
+//             } else {
+//                 servicioComprar = parseInt(
+//                     prompt('Indica el número del servicio que deseas adquirir ---> 1. Astrologia, 2. Mbti, 3. Dados, 4. Runas, 5. Tarot, 6. Eventos: '))
+//             }
+//         }
+//     }
+
+//     let agregarCarrito = false;
+//     let seguirComprando = parseInt(prompt('Desea seguir comprando, indique 1 para SI y 2 para NO'));
+
+//     while (agregarCarrito === false) {
+
+//         if (seguirComprando === 1) {
+//             agregarCarrito = true;
+//         } else if (seguirComprando === 2) {
+//             alert('Gracias por su compra');
+//             agregarCarrito = true;
+//             terminarCompra = true;
+//         } else {
+//             seguirComprando = parseInt(prompt('Desea seguir comprando, indique 1 para SI y 2 para NO'));
+//         }
+//     }
+// }
+
+// // Generando una función de simulación de presupuesto
+
+// alert ('Ahora simularemos un presupuesto')
+
+// function SimularPresupuesto () {
+
+//     let salirLoop = false;
+    
+//     let precioProductoOServicio;
+//     let cantidadProductoOServicio;
+//     let total =0; 
+//     let subtotal=0;
+//     while (salirLoop === false){
+
+//         precioProductoOServicio = parseInt(prompt('Ingresa el precio de un producto o servicio a adquirir'));
+//         cantidadProductoOServicio = parseInt(prompt('Ingresa la cantidad del producto o servicio a adquirir'));
+//         subtotal = precioProductoOServicio*cantidadProductoOServicio;
+//         total = subtotal+total;
+//         // console.log (total);
+
+//         let respuesta = parseInt(prompt('Desea seguir presupuestando, indique 1 para SI y 2 para NO'));
+
+//         if (respuesta === 1) {
+//             continue
+//         } else if (respuesta === 2){
+//             return total;
+//         } else {
+//             respuesta = parseInt(prompt('Desea seguir presupuestando, indique 1 para SI y 2 para NO'));
+//         }
+//     }
+// }
+
+// const simulandoPresupuesto = SimularPresupuesto();
+// // console.log(simulandoPresupuesto);
+// alert(simulandoPresupuesto)
 
 
 
@@ -313,8 +539,8 @@ alert(simulandoPresupuesto)
 
 
 
-// // Revisando servicios y productos aleatorios
-// console.log (sinestrias);
-// console.log (tiradaRunasNordicas4Preg);
-// console.log (tallerVirtualIntroTarot);
-// console.log (nocheTarotYVino);
+// // // Revisando servicios y productos aleatorios
+// // console.log (sinestrias);
+// // console.log (tiradaRunasNordicas4Preg);
+// // console.log (tallerVirtualIntroTarot);
+// // console.log (nocheTarotYVino);
